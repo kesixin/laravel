@@ -1,0 +1,3 @@
+info.php
+{{ $name }}
+{{ $age }}

@@ -72,3 +72,17 @@ Route::group(['prefix'=>'member'],function(){
         return 'member-multy2';
     });
 });
+
+
+
+//Route::get('member/info','MemberController@info');
+
+Route::get('member/info',['uses'=>'MemberController@info']);
+
+//Route::any('member/info',[
+//    'uses'=>'MemberController@info',
+//    'as'=>'memberinfo'
+//]);
+
+//验证路由
+Route::get('member/{id}',['uses'=>'MemberController@info'])->where('id','[0-9]+');
