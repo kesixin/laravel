@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/basic1',function(){
-    return "hello world";
+    return "hello world1";
 });
 
 Route::post('/basic2',function(){
