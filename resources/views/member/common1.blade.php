@@ -1,0 +1,1 @@
+<p>我是common1---{{ $message }}</p>

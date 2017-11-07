@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Member;
+
 class MemberController extends Controller
 {
 
@@ -11,10 +13,17 @@ class MemberController extends Controller
         //return 'member-info-id-'.$id;
        //return route('memberinfo');
         //return view('member');
-        return view('member/info',[
-            'name'=>'ksx',
-            'age'=>'20'
-        ]);
+//        return view('member/info',[
+//            'name'=>'ksx',
+//            'age'=>'20'
+//        ]);
+
+        //模型调用
+
+//        return Member::getMember();
+        $Member=new Member();
+        return $Member->Members();
+
     }
 
 }

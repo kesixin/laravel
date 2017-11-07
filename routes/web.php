@@ -86,3 +86,9 @@ Route::get('member/info',['uses'=>'MemberController@info']);
 
 //验证路由
 Route::get('member/{id}',['uses'=>'MemberController@info'])->where('id','[0-9]+');
+
+Route::get('test1',['uses'=>'TestController@test1']);
+
+Route::get('test2',['uses'=>'TestController@test2']);
+
+Route::get('section1',['uses'=>'TestController@section1']);
