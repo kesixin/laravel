@@ -92,3 +92,11 @@ Route::get('test1',['uses'=>'TestController@test1']);
 Route::get('test2',['uses'=>'TestController@test2']);
 
 Route::get('section1',['uses'=>'TestController@section1']);
+
+Route::any('/uploads', 'StudentController@uploads');
+
+Route::get('/mail','StudentController@mail');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
