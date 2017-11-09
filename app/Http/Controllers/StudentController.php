@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Mail;
 
@@ -10,6 +11,7 @@ class StudentController extends Controller
 {
     public function uploads(Request $request)
     {
+
         if($request->isMethod('POST')){
 
             $file = $request->file('source');
@@ -55,6 +57,22 @@ class StudentController extends Controller
         Mail::send('student.mail',['name'=>'ksx','phone'=>'18819201898'],function ($message){
             $message->to('903363777@qq.com');
         });
+    }
+
+    public function  cache1()
+    {
+        Cache::put('key4','val4',10);
+    }
+
+    public function cache2()
+    {
+        $val=Cache::get('key4');
+        var_dump($val);
+    }
+
+    public function error()
+    {
+        echo $name;
     }
 
 }

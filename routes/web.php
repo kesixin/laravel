@@ -97,6 +97,20 @@ Route::any('/uploads', 'StudentController@uploads');
 
 Route::get('/mail','StudentController@mail');
 
+Route::get('/cache1','StudentController@cache1');
+
+Route::get('/cache2','StudentController@cache2');
+
+Route::get('/error','StudentController@error');
+
+
+Route::resource('post','PostController');
+
+
+
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
