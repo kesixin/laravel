@@ -103,6 +103,27 @@ Route::get('/cache2','StudentController@cache2');
 
 Route::get('/error','StudentController@error');
 
+Route::group(['middleware'=>['web']],function (){
+
+    Route::get('/session1','SessionController@session1');
+
+    Route::get('/session2','SessionController@session2');
+});
+//Route::get('/session1','SessionController@session1');
+//
+//Route::get('/session2','SessionController@session2');
+
+Route::get('/response','ResponseController@response');
+
+Route::get('/activity0','ActivityController@activity0');
+
+Route::group(['middleware'=>['activity']],function (){
+
+    Route::get('/activity1','ActivityController@activity1');
+    Route::get('/activity2','ActivityController@activity2');
+
+});
+
 
 Route::resource('post','PostController');
 

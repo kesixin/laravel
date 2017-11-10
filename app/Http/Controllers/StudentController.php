@@ -11,7 +11,6 @@ class StudentController extends Controller
 {
     public function uploads(Request $request)
     {
-
         if($request->isMethod('POST')){
 
             $file = $request->file('source');
