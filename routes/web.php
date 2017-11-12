@@ -135,3 +135,6 @@ Route::resource('post','PostController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+
+Route::get('student/index',['uses'=>'StudentController@index']);
