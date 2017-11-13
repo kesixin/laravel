@@ -79,11 +79,79 @@ class StudentController extends Controller
 
     public function index()
     {
-        $students=Student::get();
+        $students = Student::paginate(10);
 
-        return view('student.index',[
-            'students'=>$students
+        return view('student.index', [
+            'students' => $students
         ]);
     }
 
+    public function create(Request $request)
+    {
+        $student=new Student();
+        if($request->isMethod('POST')){
+
+            //1.控制器验证
+            /*$this->validate($request,[
+                'Student.name'=>'required|min:2|max:20',
+                'Student.age'=>'required|integer',
+                'Student.sex'=>'required|integer'
+            ],[
+                'required'=>':attribute 为必填项',
+                'integer'=>':attribute 为整数',
+                'min'=>':attribute 长度不符合要求',
+                'max'=>':attribute 长度不符合要求'
+            ],[
+                'Student.name'=>'姓名',
+                'Student.age'=>'年龄',
+                'Student.sex'=>'性别'
+            ]);*/
+
+            //2.Validator类验证  全局
+            $validator=\Validator::make($request->input(),[
+                'Student.name'=>'required|min:2|max:20',
+                'Student.age'=>'required|integer',
+                'Student.sex'=>'required|integer'
+            ],[
+                'required'=>':attribute 为必填项',
+                'integer'=>':attribute 为整数',
+                'min'=>':attribute 长度不符合要求',
+                'max'=>':attribute 长度不符合要求'
+            ],[
+                'Student.name'=>'姓名',
+                'Student.age'=>'年龄',
+                'Student.sex'=>'性别'
+            ]);
+
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $data=$request->input('Student');
+            if(Student::create($data)){
+                return redirect('student/index')->with('success','添加成功！');
+            }else{
+                return redirect()->back()->with('error','添加失败！');
+            }
+        }
+        return view('student.create',[
+            'student'=>$student->sex()
+        ]);
+    }
+
+    public function save(Request $request)
+    {
+        $data = $request->input('Student');
+        $student = new Student();
+
+        $student->name = $data['name'];
+        $student->age = $data['age'];
+        $student->sex = $data['sex'];
+
+        if ($student->save()) {
+            return redirect('student/index');
+        } else {
+            return redirect()->back();
+        }
+    }
 }

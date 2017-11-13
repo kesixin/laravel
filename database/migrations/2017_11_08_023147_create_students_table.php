@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateStudentsTable extends Migration
 {
     /**
@@ -18,11 +16,10 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->integer('age')->unsigned()->default(0);
             $table->integer('sex')->unsigned()->default(10);
-            $table->integer('create_at')->default(0);
-            $table->integer('update_at')->default(0);
+            $table->integer('created_at')->default(0);
+            $table->integer('updated_at')->default(0);
         });
     }
-
     /**
      * Reverse the migrations.
      *
