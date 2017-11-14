@@ -135,7 +135,7 @@ class StudentController extends Controller
             }
         }
         return view('student.create',[
-            'student'=>$student->sex()
+            'student'=>$student
         ]);
     }
 
@@ -153,5 +153,25 @@ class StudentController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function update(Request $request,$id)
+    {
+
+        $student=Student::find($id);
+
+        if($request->isMethod('POST')){
+            $data=$request->input('Student');
+            $student->name=$data['name'];
+            $student->age=$data['age'];
+            $student->sex=$data['sex'];
+            if($student->save()){
+                return redirect('student/index')->with('success','修改成功-'.$id);
+            }
+        }
+
+        return view('student/update',[
+            'student'=>$student
+        ]);
     }
 }

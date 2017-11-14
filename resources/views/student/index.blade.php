@@ -27,7 +27,7 @@
                     <td>{{ date('Y-m-d H:i:s',$student->create_at) }}</td>
                     <td>
                         <a href="">详情</a>
-                        <a href="">修改</a>
+                        <a href="{{ url('/student/update',['id'=>$student->id]) }}">修改</a>
                         <a href="">删除</a>
                     </td>
                 </tr>
