@@ -4,7 +4,6 @@
     <div class="col-sm-8 blog-main">
         <form action="/posts" method="POST">
             {{ csrf_field() }}
-            <input name="user_id" type="hidden" value="0" />
             <div class="form-group">
                 <label>标题</label>
                 <input name="title" type="text" class="form-control" placeholder="这里是标题">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -31,7 +32,10 @@ class PostController extends Controller
             'content'=>'required|string|min:10',
         ]);
 
-        $post=Post::create(request(['content','title','user_id']));
+        $user_id=Auth::id();
+        $params = array_merge(request(['content','title']),compact('user_id'));
+
+        $post=Post::create($params);
         return redirect('/posts');
 
     }
