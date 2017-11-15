@@ -16,7 +16,7 @@
 
             <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="#">Kassandra Ankunding2</a></p>
 
-            <p><p>{{ $post->content }}</p></p>
+            <p><p>{!!  $post->content !!}</p></p>
             <div>
                 <a href="/posts/62/zan" type="button" class="btn btn-primary btn-lg">赞</a>
 

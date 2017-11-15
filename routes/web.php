@@ -149,6 +149,23 @@
  * 简书快速开发路由
  */
 
+//用户模块
+//注册页面
+Route::get('/register',['uses'=>'RegisterController@index']);
+//注册行为
+Route::post('/register',['uses'=>'RegisterController@register']);
+//登录页面
+Route::get('/login',['uses'=>'LoginController@index']);
+//登录行为
+Route::post('/login',['uses'=>'LoginController@login']);
+//登出行为
+Route::get('/logout',['uses'=>'LoginController@logout']);
+//用户个人设置页面
+Route::get('/user/me/setting',['uses'=>'UserController@setting']);
+//信息保存
+Route::post('/user/me/setting',['uses'=>'UserController@settingstore']);
+
+//文章模块
 //文章列表页
 Route::get('/posts',['uses'=>'PostController@index']);
 //创建文章
@@ -160,7 +177,9 @@ Route::get('/posts/{post}',['uses'=>'PostController@show']);
 Route::get('/posts/{post}/edit',['uses'=>'PostController@edit']);
 Route::put('/posts/{post}',['uses'=>'PostController@update']);
 //删除文章
-Route::get('/posts/delete',['uses'=>'PostController@delete']);
+Route::get('/posts/{post}/delete',['uses'=>'PostController@delete']);
+//图片上传
+Route::post('/posts/image/upload',['uses'=>'PostController@imageUpload']);
 
 
 

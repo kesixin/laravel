@@ -25,7 +25,15 @@ class PostController extends Controller
     public function store()
     {
 
-        return view('post.store');
+        //验证
+        $this->validate(request(),[
+            'title'=>'required|string|max:100|min:5',
+            'content'=>'required|string|min:10',
+        ]);
+
+        $post=Post::create(request(['content','title','user_id']));
+        return redirect('/posts');
+
     }
 
     public function show(Post $post)
@@ -34,18 +42,37 @@ class PostController extends Controller
 
     }
 
-    public function edit()
+    public function edit(Post $post)
     {
-        return view('post.edit');
+        return view('post.edit',compact('post'));
     }
 
-    public function update()
+    public function update(Post $post)
     {
+        //验证
+        $this->validate(request(),[
+            'title'=>'required|string|max:100|min:5',
+            'content'=>'required|string|min:10',
+        ]);
 
+        //保存
+        $post->title=request('title');
+        $post->content=request('content');
+        $post->save();
+
+        return redirect("/posts/{$post->id}");
     }
 
-    public function delete()
+    public function delete(Post $post)
     {
+        $post->delete();
 
+        return redirect('/posts');
+    }
+
+    public function imageUpload(Request $request)
+    {
+        $path=$request->file('wangEditorH5File')->storePublicly(md5(time()));
+        return asset('storage/'.$path);
     }
 }
