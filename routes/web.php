@@ -184,6 +184,9 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::post('/posts/image/upload', ['uses' => 'PostController@imageUpload']);
     //评论提交
     Route::post('/posts/{post}/comment',['uses'=>'PostController@comment']);
+
+    Route::get('/posts/{post}/zan', '\App\Http\Controllers\PostController@zan');
+    Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
 });
 
 
