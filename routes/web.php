@@ -11,9 +11,9 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 //
 //Route::get('/basic1',function(){
 //    return "hello world1";
@@ -194,6 +194,14 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/user/{user}',['uses'=>'UserController@show']);
     Route::post('/user/{user}/fan',['uses'=>'UserController@fan']);
     Route::post('/user/{user}/unfan',['uses'=>'UserController@unfan']);
+
+    //专题模块
+    //专题详情页
+    Route::get('/topic/{topic}',['uses'=>'TopicController@show']);
+    //专题投稿
+    Route::post('/topic/{topic}/submit',['uses'=>'TopicController@submit']);
+
+
 });
 
 
