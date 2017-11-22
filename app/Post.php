@@ -69,5 +69,15 @@ class Post extends Model
         });
     }
 
+    //全局scope的方式 获取通过审核和未审核的文章
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('avaiable',function (Builder $builder){
+           $builder->whereIn('status',[0,1]);
+        });
+    }
+
 
 }
