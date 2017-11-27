@@ -7,7 +7,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = \App\Topic::paginate(10);
-        return view('admin.topic.index',compact('topics'));
+        return view('admin.topic.index', compact('topics'));
     }
 
     public function create()
@@ -18,8 +18,24 @@ class TopicController extends Controller
 
     public function store()
     {
+        $this->validate(request(), [
+            'name' => 'required|string',
+        ]);
 
+        $topic = \App\Topic::create(['name' => request('name')]);
 
+        return redirect('/admin/topics');
+
+    }
+
+    public function destroy(\App\Topic $topic)
+    {
+        $topic->delete();
+
+        return [
+            'error' => 0,
+            'msg' => ''
+        ];
     }
 
 
