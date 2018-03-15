@@ -95,7 +95,7 @@
 //
 //Route::any('/uploads', 'StudentController@uploads');
 //
-//Route::get('/mail','StudentController@mail');
+Route::get('/mail','StudentController@mail');
 //
 //Route::get('/cache1','StudentController@cache1');
 //

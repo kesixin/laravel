@@ -55,9 +55,10 @@ class StudentController extends Controller
 //        });
 
         //发送html格式邮件
-        Mail::send('student.mail', ['name' => 'ksx', 'phone' => '18819201898'], function ($message) {
-            $message->to('903363777@qq.com');
+        Mail::send('student.mail', ['name' => '狼趴', 'phone' => '狼趴狼趴胡狼趴'], function ($message) {
+            $message->to('939916302@qq.com');
         });
+        return "发送成功";
     }
 
     public function cache1()
