@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50547
 File Encoding         : 65001
 
-Date: 2018-03-15 11:31:36
+Date: 2018-04-17 16:34:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,6 +29,49 @@ CREATE TABLE `about` (
 -- Records of about
 -- ----------------------------
 INSERT INTO `about` VALUES ('1', '<p style=\"margin-bottom: 20px;\"><img src=\"/ueditor/php/upload/image/20170426/1493177060116017.jpg\" _src=\"/ueditor/php/upload/image/20170426/1493177060116017.jpg\" style=\"\" title=\"1493177060116017.jpg\"></p><p style=\"margin-bottom: 20px;\"><img src=\"/ueditor/php/upload/image/20170426/1493177060299070.jpg\" _src=\"/ueditor/php/upload/image/20170426/1493177060299070.jpg\" style=\"\" title=\"1493177060299070.jpg\"></p><p style=\"margin-bottom: 20px;\"><img src=\"/ueditor/php/upload/image/20170426/1493177060810245.jpg\" _src=\"/ueditor/php/upload/image/20170426/1493177060810245.jpg\" style=\"\" title=\"1493177060810245.jpg\"></p><p style=\"margin-bottom: 20px;\"><img src=\"/ueditor/php/upload/image/20170426/1493177060537897.jpg\" _src=\"/ueditor/php/upload/image/20170426/1493177060537897.jpg\" style=\"\" title=\"1493177060537897.jpg\"></p><p style=\"margin-bottom: 20px;\"><img src=\"/ueditor/php/upload/image/20170426/1493177060212878.jpg\" _src=\"/ueditor/php/upload/image/20170426/1493177060212878.jpg\" style=\"\" title=\"1493177060212878.jpg\"></p><p style=\"margin-bottom: 20px;\"><img src=\"/ueditor/php/upload/image/20170426/1493177060125071.jpg\" _src=\"/ueditor/php/upload/image/20170426/1493177060125071.jpg\" style=\"\" title=\"1493177060125071.jpg\">&nbsp; &nbsp;&nbsp; <br></p>');
+
+-- ----------------------------
+-- Table structure for `adminuser`
+-- ----------------------------
+DROP TABLE IF EXISTS `adminuser`;
+CREATE TABLE `adminuser` (
+  `userid` int(10) NOT NULL AUTO_INCREMENT,
+  `opusername` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `opuserpass` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `zsname` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Purview` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LoginTimes` int(8) NOT NULL DEFAULT '0',
+  `LastLoginTime` datetime DEFAULT NULL,
+  `LastLoginIP` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `locking` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`userid`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 PACK_KEYS=0;
+
+-- ----------------------------
+-- Records of adminuser
+-- ----------------------------
+INSERT INTO `adminuser` VALUES ('1', 'webadmin', 'e10adc3949ba59abbe56e057f20f883e', null, '1001,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15', '937', '2017-05-12 11:09:11', '127.0.0.1', '0');
+
+-- ----------------------------
+-- Table structure for `admin_permissions`
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_permissions`;
+CREATE TABLE `admin_permissions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of admin_permissions
+-- ----------------------------
+INSERT INTO `admin_permissions` VALUES ('1', 'system', '系统管理', '2017-11-24 15:32:52', '2017-11-24 15:32:54');
+INSERT INTO `admin_permissions` VALUES ('2', 'post', '文章管理', '2017-11-24 15:33:14', '2017-11-24 15:33:17');
+INSERT INTO `admin_permissions` VALUES ('3', 'topic', '专题管理', '2017-11-24 15:33:35', '2017-11-24 15:33:38');
+INSERT INTO `admin_permissions` VALUES ('10', 'notice', '通知管理', '2017-11-24 16:13:00', '2017-11-24 16:13:00');
 
 -- ----------------------------
 -- Table structure for `admin_permission_role`
@@ -53,25 +96,24 @@ INSERT INTO `admin_permission_role` VALUES ('8', '5', '10', null, null);
 INSERT INTO `admin_permission_role` VALUES ('9', '6', '2', null, null);
 
 -- ----------------------------
--- Table structure for `admin_permissions`
+-- Table structure for `admin_roles`
 -- ----------------------------
-DROP TABLE IF EXISTS `admin_permissions`;
-CREATE TABLE `admin_permissions` (
+DROP TABLE IF EXISTS `admin_roles`;
+CREATE TABLE `admin_roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
--- Records of admin_permissions
+-- Records of admin_roles
 -- ----------------------------
-INSERT INTO `admin_permissions` VALUES ('1', 'system', '系统管理', '2017-11-24 15:32:52', '2017-11-24 15:32:54');
-INSERT INTO `admin_permissions` VALUES ('2', 'post', '文章管理', '2017-11-24 15:33:14', '2017-11-24 15:33:17');
-INSERT INTO `admin_permissions` VALUES ('3', 'topic', '专题管理', '2017-11-24 15:33:35', '2017-11-24 15:33:38');
-INSERT INTO `admin_permissions` VALUES ('10', 'notice', '通知管理', '2017-11-24 16:13:00', '2017-11-24 16:13:00');
+INSERT INTO `admin_roles` VALUES ('5', 'sys-manager', '系统管理员', '2017-11-24 16:13:38', '2017-11-24 16:13:38');
+INSERT INTO `admin_roles` VALUES ('6', 'post-manager', '文章管理员', '2017-11-24 16:15:15', '2017-11-24 16:15:15');
+INSERT INTO `admin_roles` VALUES ('7', 'topic-manager', '专题管理员', '2017-11-27 10:42:56', '2017-11-27 10:42:56');
 
 -- ----------------------------
 -- Table structure for `admin_role_user`
@@ -94,26 +136,6 @@ INSERT INTO `admin_role_user` VALUES ('4', '5', '2', null, null);
 INSERT INTO `admin_role_user` VALUES ('5', '7', '3', null, null);
 
 -- ----------------------------
--- Table structure for `admin_roles`
--- ----------------------------
-DROP TABLE IF EXISTS `admin_roles`;
-CREATE TABLE `admin_roles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Records of admin_roles
--- ----------------------------
-INSERT INTO `admin_roles` VALUES ('5', 'sys-manager', '系统管理员', '2017-11-24 16:13:38', '2017-11-24 16:13:38');
-INSERT INTO `admin_roles` VALUES ('6', 'post-manager', '文章管理员', '2017-11-24 16:15:15', '2017-11-24 16:15:15');
-INSERT INTO `admin_roles` VALUES ('7', 'topic-manager', '专题管理员', '2017-11-27 10:42:56', '2017-11-27 10:42:56');
-
--- ----------------------------
 -- Table structure for `admin_users`
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_users`;
@@ -132,28 +154,6 @@ CREATE TABLE `admin_users` (
 INSERT INTO `admin_users` VALUES ('1', 'test2', '$2y$10$PeqaLFx.t.4aB3XAk5MgtuBOi10zJU6aos9YOwIRqkb5QF0scOPEO', '2017-11-22 12:05:43', '2017-11-22 12:05:43');
 INSERT INTO `admin_users` VALUES ('2', 'test3', '$2y$10$V/pnyJij1OK00uOtnR.3oOLFoSE46.AiX0G71cZOic/XejVqwjUgy', '2017-11-22 15:54:12', '2017-11-22 15:54:12');
 INSERT INTO `admin_users` VALUES ('3', 'test4', '$2y$10$DrPhNcC/dNXzrlOlvp5W.upFMWYQvs1WN91vpLhRDVMdUe6fFyBK.', '2017-11-22 15:58:02', '2017-11-22 15:58:02');
-
--- ----------------------------
--- Table structure for `adminuser`
--- ----------------------------
-DROP TABLE IF EXISTS `adminuser`;
-CREATE TABLE `adminuser` (
-  `userid` int(10) NOT NULL AUTO_INCREMENT,
-  `opusername` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `opuserpass` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `zsname` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Purview` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `LoginTimes` int(8) NOT NULL DEFAULT '0',
-  `LastLoginTime` datetime DEFAULT NULL,
-  `LastLoginIP` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `locking` int(2) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`userid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 PACK_KEYS=0;
-
--- ----------------------------
--- Records of adminuser
--- ----------------------------
-INSERT INTO `adminuser` VALUES ('1', 'webadmin', 'e10adc3949ba59abbe56e057f20f883e', null, '1001,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15', '937', '2017-05-12 11:09:11', '127.0.0.1', '0');
 
 -- ----------------------------
 -- Table structure for `banner`
@@ -192,7 +192,7 @@ CREATE TABLE `comments` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of comments
@@ -206,6 +206,7 @@ INSERT INTO `comments` VALUES ('6', '3', '3', '发表评论', '2017-11-16 11:36:
 INSERT INTO `comments` VALUES ('7', '3', '23', '评论1', '2017-11-16 11:37:25', '2017-11-16 11:37:25');
 INSERT INTO `comments` VALUES ('8', '3', '3', '大声道', '2017-11-16 11:49:36', '2017-11-16 11:49:36');
 INSERT INTO `comments` VALUES ('9', '1', '32', '很好，不错', '2018-01-11 11:21:50', '2018-01-11 11:21:50');
+INSERT INTO `comments` VALUES ('10', '1', '32', '亮亮啊', '2018-03-23 15:35:54', '2018-03-23 15:35:54');
 
 -- ----------------------------
 -- Table structure for `fans`
@@ -323,30 +324,6 @@ CREATE TABLE `password_resets` (
 INSERT INTO `password_resets` VALUES ('462369233@qq.com', '$2y$10$qOqDJmolMit7EKMnYqp7.uC.AYimfztFDxaLEpeIVTuqWu7k7tdHS', '2017-11-08 03:05:47');
 
 -- ----------------------------
--- Table structure for `post_topics`
--- ----------------------------
-DROP TABLE IF EXISTS `post_topics`;
-CREATE TABLE `post_topics` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) NOT NULL DEFAULT '0',
-  `topic_id` int(11) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Records of post_topics
--- ----------------------------
-INSERT INTO `post_topics` VALUES ('1', '21', '1', '2017-11-21 17:19:05', '2017-11-21 17:19:08');
-INSERT INTO `post_topics` VALUES ('2', '21', '2', '2017-11-21 17:19:36', '2017-11-21 17:19:39');
-INSERT INTO `post_topics` VALUES ('3', '32', '2', '2017-11-21 17:43:29', '2017-11-21 17:43:29');
-INSERT INTO `post_topics` VALUES ('4', '31', '2', '2017-11-21 17:43:43', '2017-11-21 17:43:43');
-INSERT INTO `post_topics` VALUES ('5', '32', '1', '2017-11-21 17:44:08', '2017-11-21 17:44:08');
-INSERT INTO `post_topics` VALUES ('6', '27', '1', '2018-01-17 15:19:15', '2018-01-17 15:19:15');
-INSERT INTO `post_topics` VALUES ('7', '23', '1', '2018-01-17 15:19:20', '2018-01-17 15:19:20');
-
--- ----------------------------
 -- Table structure for `posts`
 -- ----------------------------
 DROP TABLE IF EXISTS `posts`;
@@ -391,6 +368,30 @@ INSERT INTO `posts` VALUES ('27', '修改测试成功', '<p>阿斯顿发生大�
 INSERT INTO `posts` VALUES ('30', '秋去，寒凉，冬至', '<p>昨夜风起，微雨寒凉，&nbsp;一帘幽梦，梦回故乡。</p><p>萧萧瑟瑟，凄凄凉凉，几日几夜风和雨，叶落无声又一秋。夜慢慢，天将明，秋已去，冬已至。</p><p>今朝，&nbsp;梦醒时分，推窗。恣意阳光，如潮水般，洒入玻璃窗，室内温馨起来了，光芒敞亮，使人心情开朗。空气里添了几分寒意，不是刺骨般的凉，是沁人心脾的凉。是时候，独自一人，看看风景了。我随手披一件毛衫，轻合木门，缓步，走入了初冬的南国。</p><p>眼前，是一片火红，一片金黄。秋日未凋落的枫叶，红得夺目，未枯萎的银杏，黄得发亮。叶片上的露珠，闪闪发光，晶莹透亮。看惯了北国的雪，再看南国的雨，别有一番格调，一番韵味。早起的老人们，开始锻炼了，舞剑的、练拳的、跳舞的……广场上，他们的身影，与晨光融为一体，伴鸟语、伴花香，为自然添彩，为生活添趣。顺着广场，闲走几步，便遇南湖，南湖水汽迷蒙，凉意浓浓。落叶已铺满水面，鱼游过，晃晃悠悠、翩翩荡漾。</p><p>湖边的亭子里，三三两两看书的文人，几人闲坐石凳，斜倚栏杆，捧一卷书，细细品读。半卷闲愁落花凉，清风过处觅书香。耳畔，是树间一声鸣，身边，是水间一帘梦。冬初至，南国自是不止寒凉，还有秋冬交替的美景。那些红叶、黄叶，残挂枝头的，飘零入土的，皆不尽相同。</p><p>图片发自简书App</p><p>落叶成熟的样子有很多，枫叶梦幻、银杏妖娆。却只有枯叶蝶，不是落叶，胜似落叶，虽是蝴蝶，胜似蝴蝶。在初冬，漫步丛林，偶见一只枯叶蝶，是多么美好的事。它沧桑、浪漫、迷离、入世、脱俗。枯叶蝶是幸运的，又是不幸的。它用各色的伪装迷惑天敌的双目，以求生机，以求保护。</p><p>不过，正是这种优势，这种与生俱来的上苍的恩赐，让它饱受打击。&nbsp;人们艳羡它们的美，惊叹大自然的神奇。寻遍枯叶蝶的足迹，只为一赌真容。枯叶蝶的噩梦，从人们孰知它的天赋异秉开始。</p><p>它们被大量捕获，被研究，被观赏，被制成标本，被玩于鼓掌。大自然创造了如此这般聪明的枯叶蝶，却也酿成了它的悲剧。它的保护色，虽是恩赐，却不是万能。过于完美亦是一种不幸。当枯叶蝶栖息在枯枝上，自由地呼吸着清新的空气时，不知它是否怀念那多姿的身影，摇曳的舞姿；是否会怅然许久，叹息自己悲剧的命运。也许枯叶蝶早就知道自己的保护色定会招致人类的致命之击。却也无奈成为众矢之的，无奈摆脱悲惨命运。</p><p>枯叶蝶用一生的美丽换来今生的平静，不过是想今生谋求生存，却是这种结局。或许，它们曾后悔过。或许，它们是无奈的。初冬偶遇枯叶蝶，于我是幸运，是感慨，于自然，它们是一种幻美的存在。</p><p>图片发自简书App</p><p>沧桑浮世，流年匆匆，我们找不到人生的方向，学不会认输，便只能向前一步，盲目前行，孤独探索。有时也不得不学枯叶蝶去伪装，风雨兼程，在岁月的变迁中，靠着自己的保护色，勇敢前行。尽管眉目传递着岁月的沧桑，但还不时的张望，对那桃源般的心灵乐土，向往着，期待着。即便岁月改变了容颜，却始终改变不了我们那颗向往美好的心。</p><p>绚丽自然界，花朵的娇艳，落叶的芬芳，蝴蝶的美丽，今生来世的爱与遗憾，那是世界的忧伤。花朵只能与叶子相伴，去续写自己的一生，孤独的蝶只能与花朵相伴，去追寻心的方向。有一日，落叶飘零，蝶纷飞，随风漂泊远方，去流浪，也许走过千山万水，也许阅尽世间百态，冬的清冷，也不能阻挡年轻的心，向往花开的地方。也许有一天，放下行囊，追寻一只枯叶蝶的足迹，寻寻觅觅，这世界，总有有属于我们的芬芳。</p><p>有时，人也应如落叶，不仅懂得怎样去爱人，还要懂得怎样去欣赏自己。春季做花朵的衬托，秋季做植物的养料，茂盛之时，飘落之际，从不骄傲、从不寻觅、从不依赖，自由呼吸，自由思考。只想，素心一片，笑对风尘，清浅入梦。有时，孤芳一世，自赏，亦是不错。</p><p>看庭前花开花落，望天边云卷云舒，世事冷暖，一场梦，一场空。随心、真心、留心，生活处处皆美好。不能择一处雅居，修篱种菊、赏景乐事，却可择一种心境，享乐品茗、安度春秋。</p><p>图片发自简书App</p><p>微风、落花、残叶，南国初冬，清冷时分，便忆起词人半世的沧桑和遗憾。纳兰说：人生若只如初见，何事秋风悲画扇。初见最美，但人生哪有不变的初见。有时，遗憾，亦是一种残缺的圆满。内心之窗，于走过漫漫长路后开启，恍惚望见了年华的深处，那初冬斜阳里充满希望的光芒。风雨几度、几多坎坷，人生路漫漫，一路走来，得到了很多，亦失去了很多。时间这副良药，终究会冲淡心中痛苦的执著，无痕、无声、无息，去时匆匆而过。</p><p>一片落叶，一阵清风，</p><p>一湾湖水，一轮骄阳；</p><p>一场夜雨，一场寒，</p><p>一帘残梦，一地殇，</p><p>一声问候，致朋友，</p><p>一份挂念，暖心头。</p><p>愿思念化作一轮明月，</p><p>照亮慢慢长夜，</p><p>牵挂落寞的心，</p><p>浅了岁月之痕，</p><p>淡了别离之伤</p><p>带着彼此祝福，</p><p>幸福快乐生活。</p><p>且敬过往一杯酒，</p><p>愿岁月更温柔。</p><p>2017就要过去，</p><p>天渐寒，心要暖。</p><p>秋已去，冬已至，</p><p>我在南国的初冬里，</p><p>道声：</p><p>朋友，珍重！</p>', '3', '2017-11-17 10:37:30', '2017-11-22 17:30:43', '1');
 INSERT INTO `posts` VALUES ('31', '秋，寒凉，冬至，去', '<p>萧萧瑟瑟，凄凄凉凉，几日几夜风和雨，叶落无声又一秋。夜慢慢，天将明，秋已去，冬已至。</p><p>今朝， 梦醒时分，推窗。恣意阳光，如潮水般，洒入玻璃窗，室内温馨起来了，光芒敞亮，使人心情开朗。空气里添了几分寒意，不是刺骨般的凉，是沁人心脾的凉。是时候，独自一人，看看风景了。我随手披一件毛衫，轻合木门，缓步，走入了初冬的南国。</p><p>眼前，是一片火红，一片金黄。秋日未凋落的枫叶，红得夺目，未枯萎的银杏，黄得发亮。叶片上的露珠，闪闪发光，晶莹透亮。看惯了北国的雪，再看南国的雨，别有一番格调，一番韵味。早起的老人们，开始锻炼了，舞剑的、练拳的、跳舞的……广场上，他们的身影，与晨光融为一体，伴鸟语、伴花香，为自然添彩，为生活添趣。顺着广场，闲走几步，便遇南湖，南湖水汽迷蒙，凉意浓浓。落叶已铺满水面，鱼游过，晃晃悠悠、翩翩荡漾。</p><p>湖边的亭子里，三三两两看书的文人，几人闲坐石凳，斜倚栏杆，捧一卷书，细细品读。半卷闲愁落花凉，清风过处觅书香。耳畔，是树间一声鸣，身边，是水间一帘梦。冬初至，南国自是不止寒凉，还有秋冬交替的美景。那些红叶、黄叶，残挂枝头的，飘零入土的，皆不尽相同。</p><p>作者：娟娟新月</p><p>鏈接：http://www.jianshu.com/p/43362635aee2</p><p>來源：簡書</p><p>著作權歸作者所有。商業轉載請聯繫作者獲得授權，非商業轉載請註明出處。</p><p><br></p>', '3', '2017-11-17 11:28:56', '2017-11-22 17:29:04', '1');
 INSERT INTO `posts` VALUES ('32', '秋去，寒凉，冬至', '<p>萧萧瑟瑟，凄凄凉凉，几日几夜风和雨，叶落无声又一秋。夜慢慢，天将明，秋已去，冬已至。</p><p>今朝，&nbsp;梦醒时分，推窗。恣意阳光，如潮水般，洒入玻璃窗，室内温馨起来了，光芒敞亮，使人心情开朗。空气里添了几分寒意，不是刺骨般的凉，是沁人心脾的凉。是时候，独自一人，看看风景了。我随手披一件毛衫，轻合木门，缓步，走入了初冬的南国。</p><p>眼前，是一片火红，一片金黄。秋日未凋落的枫叶，红得夺目，未枯萎的银杏，黄得发亮。叶片上的露珠，闪闪发光，晶莹透亮。看惯了北国的雪，再看南国的雨，别有一番格调，一番韵味。早起的老人们，开始锻炼了，舞剑的、练拳的、跳舞的……广场上，他们的身影，与晨光融为一体，伴鸟语、伴花香，为自然添彩，为生活添趣。顺着广场，闲走几步，便遇南湖，南湖水汽迷蒙，凉意浓浓。落叶已铺满水面，鱼游过，晃晃悠悠、翩翩荡漾。</p><p>湖边的亭子里，三三两两看书的文人，几人闲坐石凳，斜倚栏杆，捧一卷书，细细品读。半卷闲愁落花凉，清风过处觅书香。耳畔，是树间一声鸣，身边，是水间一帘梦。冬初至，南国自是不止寒凉，还有秋冬交替的美景。那些红叶、黄叶，残挂枝头的，飘零入土的，皆不尽相同。</p><p>作者：娟娟新月</p><p>鏈接：http://www.jianshu.com/p/43362635aee2</p><p>來源：簡書</p><p>著作權歸作者所有。商業轉載請聯繫作者獲得授權，非商業轉載請註明出處。</p><p><br></p>', '3', '2017-11-17 11:29:14', '2017-11-22 17:27:20', '1');
+
+-- ----------------------------
+-- Table structure for `post_topics`
+-- ----------------------------
+DROP TABLE IF EXISTS `post_topics`;
+CREATE TABLE `post_topics` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL DEFAULT '0',
+  `topic_id` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of post_topics
+-- ----------------------------
+INSERT INTO `post_topics` VALUES ('1', '21', '1', '2017-11-21 17:19:05', '2017-11-21 17:19:08');
+INSERT INTO `post_topics` VALUES ('2', '21', '2', '2017-11-21 17:19:36', '2017-11-21 17:19:39');
+INSERT INTO `post_topics` VALUES ('3', '32', '2', '2017-11-21 17:43:29', '2017-11-21 17:43:29');
+INSERT INTO `post_topics` VALUES ('4', '31', '2', '2017-11-21 17:43:43', '2017-11-21 17:43:43');
+INSERT INTO `post_topics` VALUES ('5', '32', '1', '2017-11-21 17:44:08', '2017-11-21 17:44:08');
+INSERT INTO `post_topics` VALUES ('6', '27', '1', '2018-01-17 15:19:15', '2018-01-17 15:19:15');
+INSERT INTO `post_topics` VALUES ('7', '23', '1', '2018-01-17 15:19:20', '2018-01-17 15:19:20');
 
 -- ----------------------------
 -- Table structure for `project`
@@ -483,6 +484,30 @@ INSERT INTO `topics` VALUES ('2', '青春', '2017-11-21 15:28:11', '2017-11-21 1
 INSERT INTO `topics` VALUES ('4', '工作', '2017-11-27 10:05:45', '2017-11-27 10:05:45');
 
 -- ----------------------------
+-- Table structure for `users`
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `avatar` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES ('2', 'user2', 'user1@gmail.com.cn', '$2y$10$cls3w2ozhr9eJZhEwxsojeRfO/.uH.cXlOJxJ8pdsSlZsVKjuC2.a', 'B5elmU4BP7zWZSEJNimxtmhj5jJNycEaqZ5JpRrem2bTphvbJFx39ksMc86k', '2017-11-15 18:25:03', '2017-11-15 18:25:03', '/storage/5fe388a539c78770add3ac4b2b833bcf/HwovkLq9y49V09QjAhA7SCQXZWwxcRa4Yg1bdhEA.png');
+INSERT INTO `users` VALUES ('3', 'user3', '4623369233@qq.com', '$2y$10$vobVJtMnZcB0MbTRiUoyUe1OFFQEYlMqSH0c2UY6XrSY3TT5qaTvm', 'mvLMPbue9Rw9dIyi2j1NWm5k5MStjopeLqiK02Pz0iWbSCjK4CfROxKKoPXD', '2017-11-15 18:27:01', '2017-11-15 18:27:01', '/storage/5fe388a539c78770add3ac4b2b833bcf/HwovkLq9y49V09QjAhA7SCQXZWwxcRa4Yg1bdhEA.png');
+INSERT INTO `users` VALUES ('4', 'user4', 'user4@gmail.com.cn', '$2y$10$IwGiOXOL5BlyXW6KABH1r.UpS30e0CpORchxjucnu6S3jGoJN4oW2', '17nfUlP885YJgJ0dXrYHtUdBeBSiZyG9k2EdiBwbltmnNVnL5ixplRPGRtnM', '2017-11-15 18:28:36', '2017-11-15 18:28:36', '/storage/5fe388a539c78770add3ac4b2b833bcf/HwovkLq9y49V09QjAhA7SCQXZWwxcRa4Yg1bdhEA.png');
+INSERT INTO `users` VALUES ('1', 'user1', 'user5@gmail.com.cn', '$2y$10$TiQq.lkuvbm1gvVN5zcfG.vTVDkAyNwd27ADZOvLs8wx4D8CihV.y', '5Bko7hcy0381HJbu3q9BezARDAPaw62dBNYqYxaSWPwH2DyioeQM7ILldl73', '2017-11-15 18:29:17', '2017-11-15 18:29:17', '/storage/5fe388a539c78770add3ac4b2b833bcf/HwovkLq9y49V09QjAhA7SCQXZWwxcRa4Yg1bdhEA.png');
+
+-- ----------------------------
 -- Table structure for `user_notice`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_notice`;
@@ -508,30 +533,6 @@ INSERT INTO `user_notice` VALUES ('9', '2', '4');
 INSERT INTO `user_notice` VALUES ('10', '3', '4');
 INSERT INTO `user_notice` VALUES ('11', '4', '4');
 INSERT INTO `user_notice` VALUES ('12', '1', '4');
-
--- ----------------------------
--- Table structure for `users`
--- ----------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `avatar` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Records of users
--- ----------------------------
-INSERT INTO `users` VALUES ('2', 'user2', 'user1@gmail.com.cn', '$2y$10$cls3w2ozhr9eJZhEwxsojeRfO/.uH.cXlOJxJ8pdsSlZsVKjuC2.a', 'B5elmU4BP7zWZSEJNimxtmhj5jJNycEaqZ5JpRrem2bTphvbJFx39ksMc86k', '2017-11-15 18:25:03', '2017-11-15 18:25:03', '/storage/5fe388a539c78770add3ac4b2b833bcf/HwovkLq9y49V09QjAhA7SCQXZWwxcRa4Yg1bdhEA.png');
-INSERT INTO `users` VALUES ('3', 'user3', '4623369233@qq.com', '$2y$10$vobVJtMnZcB0MbTRiUoyUe1OFFQEYlMqSH0c2UY6XrSY3TT5qaTvm', 'mvLMPbue9Rw9dIyi2j1NWm5k5MStjopeLqiK02Pz0iWbSCjK4CfROxKKoPXD', '2017-11-15 18:27:01', '2017-11-15 18:27:01', '/storage/5fe388a539c78770add3ac4b2b833bcf/HwovkLq9y49V09QjAhA7SCQXZWwxcRa4Yg1bdhEA.png');
-INSERT INTO `users` VALUES ('4', 'user4', 'user4@gmail.com.cn', '$2y$10$IwGiOXOL5BlyXW6KABH1r.UpS30e0CpORchxjucnu6S3jGoJN4oW2', null, '2017-11-15 18:28:36', '2017-11-15 18:28:36', '/storage/5fe388a539c78770add3ac4b2b833bcf/HwovkLq9y49V09QjAhA7SCQXZWwxcRa4Yg1bdhEA.png');
-INSERT INTO `users` VALUES ('1', 'user1', 'user5@gmail.com.cn', '$2y$10$TiQq.lkuvbm1gvVN5zcfG.vTVDkAyNwd27ADZOvLs8wx4D8CihV.y', 'CD87GJvKMWXTI9b9z9hgV3HCl1VHZwlRL5jRj8z8RT3NbIwd4NKMYKE1iVwl', '2017-11-15 18:29:17', '2017-11-15 18:29:17', '/storage/5fe388a539c78770add3ac4b2b833bcf/HwovkLq9y49V09QjAhA7SCQXZWwxcRa4Yg1bdhEA.png');
 
 -- ----------------------------
 -- Table structure for `zans`
